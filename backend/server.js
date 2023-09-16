@@ -21,10 +21,10 @@ app.use(express.json()); // To accept JSON data in the body
 app.get("/", (req, res) => {
   res.send("API is running successfully!");
 });
-app.use("https://education-iasa.onrender.com/api/user", userRoutes);
-app.use("https://education-iasa.onrender.com/api/chat", chatRoutes);
-app.use("https://education-iasa.onrender.com/api/message", messageRoutes);
-app.use("https://education-iasa.onrender.com/admin", adminRouter);
+app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
+app.use("/admin", adminRouter);
 app.use(notFound);
 app.use(errorHandler);
 
