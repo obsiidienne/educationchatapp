@@ -36,7 +36,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin:"https://educationchatapp.vercel.app/auth",
+    origin:"https://education-apzv.onrender.com/auth",
     
   },
 });
