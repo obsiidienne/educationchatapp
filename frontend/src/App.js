@@ -4,8 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import Auth from "./Pages/Auth";
 import ChatPage from "./Pages/ChatPage";
-//import AdminLoginPage from "./Pages/AdminLoginPage";
-//import AdminHomePage from "./Pages/AdminHomePage";
+import { useEffect, useState } from "react";
 import AdminLoginPage from "./Pages/AdminLoginPage";
 import AdminHomePage from "./Pages/AdminHomePage";
 import EtablissementHomePage from "./Pages/EtablissementHomePage";
@@ -15,6 +14,11 @@ import EditUserPage from "./Pages/EditUserPage";
 import Sidebar from "./Pages/sidebar";
 import Sidebarr from "./Components/sidebar/sidebar";
 function App() {
+    useEffect(() => {
+    fetch("https://educationline.onrender.com")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message));
+  },[]);
   return (
     <div className="App">
       <Routes>
