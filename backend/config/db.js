@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", false);
-    const conn = await mongoose.connect("mongodb://127.0.0.1:27017/lolipop", {
+    const conn = await mongoose.connect("mongodb+srv://lyrabene:s147llhRMri091Wp@cluster0.hklpyew.mongodb.net/lolipop?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
