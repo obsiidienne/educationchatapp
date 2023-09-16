@@ -16,8 +16,7 @@ import Sidebarr from "./Components/sidebar/sidebar";
 function App() {
     useEffect(() => {
     fetch("https://educationline.onrender.com")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
+      .then((res) => res.json());
   },[]);
   return (
     <div className="App">
