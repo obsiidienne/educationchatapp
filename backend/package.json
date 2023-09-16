@@ -4,11 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": " npm start --prefix frontend && nodemon backend/server.js ",
-    "server": "nodemon backend/server.js",
- "client": "npm start --prefix frontend",
-    "dev": "npm start backend/server.js && npm run client",
-    "build":"npm start backend/server.js\" \"npm run client"
+    "start": "nodemon backend/server.js ",
+    "build":"npm i"
   },
   "author": "Akshay Sharma",
   "license": "ISC",
