@@ -489,7 +489,7 @@ const Signup = ({ handleSignup }) => {
           setToastIcon("");
         }, 1500);
         setTimeout(() => {
-          history("/admin/home");
+          history("/auth");
         }, 1700);
 
         setInput({
