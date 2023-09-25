@@ -166,24 +166,6 @@ const SideDrawer = () => {
             </Text>
           </Button>
         </Tooltip>
-        <Text
-          fontWeight="bold"
-          fontFamily=""
-          color="#025f6c"
-          ml={{ base: "80px", md: "flex" }}px="4"
-        >
-          الجمهورية الجزائرية الديمقراطية الشعبية
-           
-        </Text>
-            </br>
-        <Text
-          
-          fontWeight="bold"
-          fontFamily=""
-          color="#05704d" 
-          ml={{ base: "80px", md: "flex" }}px="4"
-        >مديرية التربية لولاية سطيف
-        </Text>
         <RightDiv>
         <Menu>
             <MenuButton p={1}>
