@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
-import { red } from "../../Colors/colors";
 import { MdAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import Toast from "../Toast";
 import { ReactComponent as Loader } from "../../Images/buttonLoader.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import logo from "./lolo.png";
+import logoo from "./lololo.png";
 
 const LoginForm = styled.form`
   width: 100%;
@@ -324,6 +325,8 @@ const Login = ({ handleSignup }) => {
   return (
     <>
       <LoginForm>
+      <img src={logoo} alt="logo" height="150" width="250" style={{Top:"-30%"}} ></img>
+      <img src={logo} alt="logo" height="600" width="550" ></img>
         <InputBox>
           <Right>
             <MdAlternateEmail color="black" size="20px" />
@@ -365,7 +368,7 @@ const Login = ({ handleSignup }) => {
         <CenterDiv>
           <Show>
             <input type="checkbox" checked={show} onChange={handleClick} />
-            <Text>Show Password</Text>
+            <Text>Afficher le mot de passe</Text>
           </Show>
         </CenterDiv>
         <br />
@@ -383,7 +386,7 @@ const Login = ({ handleSignup }) => {
             onClick={handleLogin}
             disabled={showLoader}
           >
-            {!showLoader ? "Login" : <LoadIcon />}
+            {!showLoader ? "Se connecter" : <LoadIcon />}
           </SubmitButton>
         </ButtonBox>
         <HorizontalLine />
