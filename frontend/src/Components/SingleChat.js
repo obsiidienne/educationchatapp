@@ -57,7 +57,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     },
   };
 
-  const { user, selectedChat, setSelectedChat } = ChatState();
+   const { selectedChat, setSelectedChat, user, notification, setNotification } =
+    ChatState();
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -98,20 +99,25 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket.on("stop typing", () => setIsTyping(false));
   }, []);
 
-  useEffect(() => {
+ useEffect(() => {
     fetchMessages();
+
     selectedChatCompare = selectedChat;
+    // eslint-disable-next-line
   }, [selectedChat]);
 
   useEffect(() => {
-    socket.on("message received", (newMessageReceived) => {
+    socket.on("message recieved", (newMessageRecieved) => {
       if (
-        !selectedChatCompare &&
-        selectedChatCompare._id !== newMessageReceived.chat._id
+        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
-        //give notification
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([newMessageRecieved, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
       } else {
-        setMessages([...messages, newMessageReceived]);
+        setMessages([...messages, newMessageRecieved]);
       }
     });
   });
@@ -301,7 +307,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           flexDirection="column"
           h="100%"
         >
-          <Image boxSize="70%" src={Icon} alt="icon" />
+         
           <Text
             fontSize={{ base: "20px", md: "25px", lg: "30px" }}
             fontWeight="bold"
