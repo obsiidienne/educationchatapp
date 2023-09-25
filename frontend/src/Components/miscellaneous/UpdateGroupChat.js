@@ -294,12 +294,12 @@ const UpdateGroupChat = ({
                 isLoading={renameLoading}
                 onClick={handleRename}
               >
-                Rename
+                Renommer
               </Button>
             </FormControl>
             <FormControl display="flex">
               <Input
-                placeholder="Add Users to Group"
+                placeholder="Ajouter d'autres utilisateurs"
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />
@@ -325,7 +325,7 @@ const UpdateGroupChat = ({
               mr={3}
               onClick={() => handleRemove(user)}
             >
-              Leave Group
+              Quitter le groupe
             </Button>
           </ModalFooter>
         </ModalContent>
