@@ -2,12 +2,27 @@ import React, { useEffect, useState } from "react";
 import "../AdminHome/AdminHome.css";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
+import styled from "styled-components";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../redux/userSlice";
+const MainBox = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+`;
+const Tablee = styled.div`
+width:100%;
+margin-left:10%;
 
+`;
 const AdminHome = () => {
   const navigate = useNavigate();
   const [cookie, setCookie, removeCookie] = useCookies([]);
@@ -69,8 +84,9 @@ const AdminHome = () => {
   }
 
   return (
-    <div>
-      <h1 className="heading">Users List</h1>
+    <MainBox>
+    <div >
+      <h1 className="heading">Liste des utilisateurs</h1>
 
       <div className="btnctr">
         <input
@@ -89,21 +105,22 @@ const AdminHome = () => {
             navigate("/auth");
           }}
         >
-          Add User
+          Ajouter un nouveau utilisateur
         </button>
       </div>
-
-      <Table striped bordered hover responsive variant="light" style={{ width:"78%",marginLeft:"15%",Bottom:"50%"}}>
+      <Tablee>
+      <Table striped bordered hover responsive variant="light" >
+      
         <thead>
           <tr>
           <th>#</th>
             <th>Nom</th>
-            <th>prenom</th>
+            <th>prénom</th>
             <th>Fonction</th>
-            <th>etablissement</th>
+            <th>Nom de l'établissement</th>
+            <th>Type d'établissement</th>
             <th>Email</th>
-            <th>Phone Number</th>
-            <th>Profile picture</th>
+            <th>Télephone</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -116,10 +133,10 @@ const AdminHome = () => {
                     <td>{user.firstname}</td>
                     <td>{user.lastname}</td>
                     <td>{user.role}</td>
+                    <td>{user.nometab}</td>
                     <td>{user.typetab}</td>
                     <td>{user.email}</td>
                     <td>{user.phonenumber}</td>
-                    <td>{user.pic}</td>
                     <td>
                       <button
                         className="editBtn"
@@ -129,10 +146,10 @@ const AdminHome = () => {
                               firstname: user.firstname,
                               lastname: user.lastname,
                               role: user.role,
+                              nometab: user.nometab,
                               typetab:user.typetab,
                                 email: user.email,
                                 phonenumber: user.phonenumber,
-                                pic: user.pic,
                                 id: user._id,
                             })
                           );
@@ -147,7 +164,7 @@ const AdminHome = () => {
                           deleteUser(user._id);
                         }}
                       >
-                        Delete
+                       Delete
                       </button>
                     </td>
                   </tr>
@@ -160,10 +177,11 @@ const AdminHome = () => {
                     <td>{user.firstname}</td>
                     <td>{user.lastname}</td>
                     <td>{user.role}</td>
+                    <td>{user.nometab}</td>
                     <td>{user.typetab}</td>
                     <td>{user.email}</td>
                     <td>{user.phonenumber}</td>
-                    <td>{user.pic}</td>
+                    
                     <td>
                       <button
                         className="editBtn"
@@ -173,10 +191,11 @@ const AdminHome = () => {
                               firstname: user.firstname,
                               lastname: user.lastname,
                               role: user.role,
+                              nometab: user.nometab,
                               typetab:user.typetab,
                               email: user.email,
                               phonenumber: user.phonenumber,
-                              pic: user.pic,
+                              
                               id: user._id,
                             })
                           );
@@ -191,7 +210,7 @@ const AdminHome = () => {
                           deleteUser(user._id);
                         }}
                       >
-                        Delete
+                       Delete
                       </button>
                     </td>
                   </tr>
@@ -199,8 +218,11 @@ const AdminHome = () => {
               })}
         </tbody>
         <ToastContainer />
+        
       </Table>
+      </Tablee>
     </div>
+    </MainBox>
   );
 };
 
