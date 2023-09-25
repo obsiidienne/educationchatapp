@@ -241,6 +241,7 @@ const Signup = ({ handleSignup }) => {
     firstName: "",
     lastName: "",
     role: "",
+    nometab: "",
     typetab: "",
     email: "",
     password: "",
@@ -251,6 +252,7 @@ const Signup = ({ handleSignup }) => {
     firstName: "",
     lastName: "",
     role: "",
+    nometab: "",
     typetab: "",
     email: "",
     password: "",
@@ -296,6 +298,11 @@ const Signup = ({ handleSignup }) => {
         case "typetab":
           if (!value) {
             stateObj[name] = "veuillez choisir votre type d'etablissement.";
+          }
+          break;
+          case "nometab":
+          if (!value) {
+            stateObj[name] = "veuillez entrer le nom de votre etablissement.";
           }
           break;
 
@@ -365,6 +372,7 @@ const Signup = ({ handleSignup }) => {
       firstName,
       lastName,
       role,
+      nometab,
       typetab,
       email,
       password,
@@ -375,6 +383,7 @@ const Signup = ({ handleSignup }) => {
       !firstName ||
       !lastName ||
       !role||
+      !nometab||
       !typetab ||
       !email ||
       !phone ||
@@ -390,6 +399,11 @@ const Signup = ({ handleSignup }) => {
         setError((prev) => ({ ...prev, lastName: "veuillez entrer votre prénom." }));
       if (!role)
         setError((prev) => ({ ...prev, gender: "veuillez choisir votre poste." }));
+        if (!nometab)
+        setError((prev) => ({
+          ...prev,
+          nometab: "veuillez entrer le nom de votre etablissement.",
+        }));
       if (!typetab)
         setError((prev) => ({ ...prev, country: "veuillez choisir le type de votre etablissement." }));
       if (!email)
@@ -448,6 +462,7 @@ const Signup = ({ handleSignup }) => {
       firstName &&
       lastName &&
       role &&
+      nometab &&
       typetab &&
       email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) &&
       phone.match(/^\+\d{12}$/g) &&
@@ -469,6 +484,7 @@ const Signup = ({ handleSignup }) => {
             firstname,
             lastname,
             role,
+            nometab,
             typetab,
             email,
             phonenumber,
@@ -489,13 +505,14 @@ const Signup = ({ handleSignup }) => {
           setToastIcon("");
         }, 1500);
         setTimeout(() => {
-          history("/auth");
+          history("/admin/home");
         }, 1700);
 
         setInput({
           firstName: "",
           lastName: "",
           role: "",
+          nometab: "",
           typetab: "",
           email: "",
           password: "",
@@ -625,10 +642,26 @@ const Signup = ({ handleSignup }) => {
               Selectionner un post
             </option>
             <option value="Directeur">Directeur</option>
-            <option value="Econome">Econome</option>
             <option value="Chef de service">Chef de service</option>
             <option value="Inspecteur">Inspecteur</option>
           </Selectrole>
+        </InputBox>
+        <InputBox>
+          <Right>
+            <AiOutlineUser color="black" size="20px" />
+          </Right>
+          <InputTextContainer>
+            <InputWithText
+              value={input.nometab}
+              onChange={onInputChange}
+              name="nometab"
+              type="text"
+              placeholder="Nom d'etablissement"
+              ref={inputRef}
+              required
+            />
+            {error.nometab && <SpanText>{error.nometab}</SpanText>}
+          </InputTextContainer>
         </InputBox>
         <InputBox>
           <Selectetab
@@ -640,10 +673,10 @@ const Signup = ({ handleSignup }) => {
             <option value="" disabled hidden>
               Selectionner un etablissement
             </option>
-            <option value="Lycee">Lycee</option>
-            <option value="Collége">Collége</option>
-            <option value="Primaire">Primaire</option>
-            <option value="Ecole Prive">Ecole Prive</option>
+            <option value="Lycée">Lycée</option>
+            <option value="CEM">CEM</option>
+            <option value="Ecole">Ecole</option>
+            <option value="Ecole Privée">Ecole Privée</option>
             <option value="Education">Education</option>
           </Selectetab>
         </InputBox>
@@ -685,7 +718,7 @@ const Signup = ({ handleSignup }) => {
               value={input.password}
               type={show ? "text" : "password"}
               name="password"
-              placeholder="Password"
+              placeholder="Entrer le mot de passe"
               autoComplete="off"
               onBlur={validateInput}
               required
@@ -696,7 +729,7 @@ const Signup = ({ handleSignup }) => {
         <CenterDiv>
           <Show>
             <input type="checkbox" checked={show} onChange={handleClick} />
-            <Text>Show Password</Text>
+            <Text>Afficher le mot de passe.</Text>
           </Show>
         </CenterDiv>
         <InputBox>
@@ -709,7 +742,7 @@ const Signup = ({ handleSignup }) => {
               value={input.confirmPassword}
               type={show1 ? "text" : "password"}
               name="confirmPassword"
-              placeholder="Confirm Password"
+              placeholder="Confirmer le mot de passe"
               autoComplete="off"
               onBlur={validateInput}
               required
@@ -722,15 +755,15 @@ const Signup = ({ handleSignup }) => {
         <CenterDiv>
           <Show>
             <input type="checkbox" checked={show1} onChange={handleClick1} />
-            <Text>Show Password</Text>
+            <Text>Afficher le mot de passe.</Text>
           </Show>
         </CenterDiv>
         <br />
         <CenterDiv>
           <Ques>
             <Text>
-              Already Have a account?
-              <Anchor onClick={() => handleSignup()}>Login</Anchor>
+              Vous avez déja un compte?
+              <Anchor onClick={() => handleSignup()}>Se connecter</Anchor>
             </Text>
           </Ques>
         </CenterDiv>
@@ -740,7 +773,7 @@ const Signup = ({ handleSignup }) => {
             onClick={handleSubmit}
             disabled={showLoader}
           >
-            {!showLoader ? "Signup" : <LoadIcon />}
+            {!showLoader ? "Ajouter" : <LoadIcon />}
           </SubmitButton>
         </InputBoxButton>
       </LoginForm>
