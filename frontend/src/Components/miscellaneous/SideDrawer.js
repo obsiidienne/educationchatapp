@@ -21,6 +21,8 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
+import NotificationBadge from "react-notification-badge";
+import { Effect } from "react-notification-badge";
 import { AiFillBell } from "react-icons/ai";
 import { FiChevronDown } from "react-icons/fi";
 import { ChatState } from "../../Context/ChatProvider";
@@ -28,6 +30,7 @@ import ProfileModal from "./ProfileModal";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ChatLoading from "../ChatLoading";
+import { getSender } from "../../config/ChatLogics";
 import Toast from "../Toast";
 import UserListItem from "../UserAvatar/UserListItem";
 import logo from "./8068609.png";
@@ -50,7 +53,15 @@ const SideDrawer = () => {
   const [loadingChat, setLoadingChat] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user, setSelectedChat, chats, setChats } = ChatState();
+  const {
+    setSelectedChat,
+    user,
+    notification,
+    setNotification,
+    chats,
+    setChats,
+  } = ChatState();
+
 
   const navigate = useNavigate();
   const logoutHandler = () => {
@@ -158,17 +169,50 @@ const SideDrawer = () => {
         <Text
           fontSize="2xl"
           fontWeight="bold"
-          color="black"
+          fontFamily=""
+          color="#025f6c"
+          marginRight="-50%"
+          marginTop="-1%"
           ml={{ base: "80px", md: "unset" }}
         >
-          <img src={logo} alt="logo" height="50" width="50" ></img>
+          الجمهورية الجزائرية الديمقراطية الشعبية
+           
+        </Text>
+        <Text
+          fontSize="18px"
+          fontWeight="bold"
+          fontFamily=""
+          color="#05704d"
+          marginTop="2%"
+          
+          ml={{ base: "80px", md: "unset" }}
+        >مديرية التربية لولاية سطيف
         </Text>
         <RightDiv>
-          <Menu>
+        <Menu>
             <MenuButton p={1}>
-              <BellIcon color="black" size="20px" />
+              <NotificationBadge
+                count={notification.length}
+                effect={Effect.SCALE}
+              />
+              <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
-            {/* <MenuList></MenuList> */}
+            <MenuList pl={2}>
+              {!notification.length && "No New Messages"}
+              {notification?.map((notif,key) => (
+                <MenuItem
+                  key={notif._id}
+                  onClick={() => {
+                    setSelectedChat(notif.chat);
+                    setNotification(notification.filter((n) => n !== notif));
+                  }}
+                >
+                  {notif.chat.isGroupChat
+                    ? `New Message in ${notif.chat.chatName}`
+                    : `New Message from ${getSender(user, notif.chat.users)}`}
+                </MenuItem>
+              ))}
+            </MenuList>
           </Menu>
           <Menu>
             <MenuButton
@@ -203,7 +247,7 @@ const SideDrawer = () => {
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">Rechercher un utilisateur</DrawerHeader>
           <DrawerBody>
             <Box display="flex" pb={2}>
               <Input
@@ -225,7 +269,7 @@ const SideDrawer = () => {
               <ChatLoading />
             ) : searchResults.length === 0 ? (
               <Text textAlign="center" fontSize="sm">
-                No Users Found
+               Aucun utilisateur trouvé
               </Text>
             ) : (
               searchResults.map((user) => (
