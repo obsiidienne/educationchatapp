@@ -34,7 +34,7 @@ const MessaeBox = styled.div`
   }
 `;
 
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "https://educationline.onrender.com";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
