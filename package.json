@@ -7,7 +7,7 @@
     "start": "nodemon backend/server.js",
     "install-server": "cd backend && npm install",
     "start-server": "cd backend && node server.js",
-    "install-client": "cd frontend && npm install",
+    "install-client": "cd frontend && npm install && npm install react-notification-badge --force ",
     "build-client": "cd frontend && npm run build",
     "start-client": "cd frontend && npm run start"
     
