@@ -7,6 +7,7 @@ const registerUser = asyncHandler(async (req, res) => {
     firstname,
     lastname,
     role,
+    nometab,
     typetab,
     email,
     phonenumber,
@@ -18,6 +19,7 @@ const registerUser = asyncHandler(async (req, res) => {
     !firstname ||
     !lastname ||
     !role ||
+    !nometab ||
     !typetab ||
     !email ||
     !phonenumber ||
@@ -38,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     firstname,
     lastname,
     role,
+    nometab,
     typetab,
     email,
     phonenumber,
@@ -53,6 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
       firstname: user.firstname,
       lastname: user.lastname,
       role: user.role,
+      nometab: user.nometab,
       typetab: user.typetab,
       email: user.email,
       pic: user.pic,
@@ -75,6 +79,7 @@ const authUser = asyncHandler(async (req, res) => {
       firstname: user.firstname,
       lastname: user.lastname,
       role: user.role,
+      nometab: user.nometab,
       typetab: user.typetab,
       email: user.email,
       pic: user.pic,
@@ -82,7 +87,7 @@ const authUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error("Wrong Credentials.");
+    throw new Error("Mauvaises informations d'identification.");
   }
 });
 
@@ -93,6 +98,7 @@ const allUsers = asyncHandler(async (req, res) => {
           { firstname: { $regex: req.query.search, $options: "i" } },
           { email: { $regex: req.query.search, $options: "i" } },
           { role: { $regex: req.query.search, $options: "i" } },
+          { nometab: { $regex: req.query.search, $options: "i" } },
           { typetab: { $regex: req.query.search, $options: "i" } },
         ],
       }
