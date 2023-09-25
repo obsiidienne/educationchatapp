@@ -173,7 +173,7 @@ const SideDrawer = () => {
           color="#025f6c"
           marginRight="-50%"
           marginTop="-1%"
-          ml={{ base: "80px", md: "unset" }}
+          ml={{ base: "80px", md: "flex" }}
         >
           الجمهورية الجزائرية الديمقراطية الشعبية
            
@@ -185,7 +185,7 @@ const SideDrawer = () => {
           color="#05704d"
           marginTop="2%"
           
-          ml={{ base: "80px", md: "unset" }}
+          ml={{ base: "80px", md: "flex" }}
         >مديرية التربية لولاية سطيف
         </Text>
         <RightDiv>
