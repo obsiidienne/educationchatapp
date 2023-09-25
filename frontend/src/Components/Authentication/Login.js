@@ -386,7 +386,7 @@ const Login = ({ handleSignup }) => {
             onClick={handleLogin}
             disabled={showLoader}
           >
-            {!showLoader ? "Se connecter" : <LoadIcon />}
+            {!showLoader ? "Connecter" : <LoadIcon />}
           </SubmitButton>
         </ButtonBox>
         <HorizontalLine />
