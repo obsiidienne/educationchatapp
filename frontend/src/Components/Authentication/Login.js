@@ -371,15 +371,7 @@ const Login = ({ handleSignup }) => {
             <Text>Afficher le mot de passe</Text>
           </Show>
         </CenterDiv>
-        <br />
-        <CenterDiv>
-          <Ques>
-            <Text>
-              Créer un compte?
-              <Anchor onClick={() => handleSignup()}>S'inscrire</Anchor>
-            </Text>
-          </Ques>
-        </CenterDiv>
+        
         <ButtonBox>
           <SubmitButton
             type="submit"
